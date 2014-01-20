@@ -1,0 +1,27 @@
+diff --git a/common/ant/common.xml b/common/ant/common.xml
+index 199e5d3..6629ff5 100644
+--- a/common/ant/common.xml
++++ b/common/ant/common.xml
+@@ -119,7 +119,7 @@
+     <!-- Intra-project dependency property names -->
+ 
+     <property name="jsf-tools.jar" 
+-              value="${maven.repo.local}/com/sun/faces/build/jsf-tools/${snapshot.version}/jsf-tools-${snapshot.version}.jar" />
++              value="${jsf.build.home}/jsf-tools/target/jsf-tools-${snapshot.version}.jar" />
+ 
+     <!-- Test classpaths that are used in multiple places within the project -->
+     <path id="junit.classpath">
+@@ -157,11 +157,11 @@
+     </path>
+ 
+     <path id="compile.classpath">
+-        <path refid="compile.path"/>
++        <fileset dir="${jsf.build.home}/lib/compile"/>
+     </path>
+ 
+     <path id="apache.commons.classpath">
+-        <path refid="commons.path"/>
++        <fileset dir="${jsf.build.home}/lib"/>
+     </path>
+ 
+     <!-- HtmlUnit client classpath -->

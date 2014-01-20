@@ -1,0 +1,42 @@
+From 681afa7bf8d77aac809595e0bfcf79a9e9ef71a0 Mon Sep 17 00:00:00 2001
+From: Juan Hernandez <juan.hernandez@redhat.com>
+Date: Tue, 24 Jul 2012 19:10:59 +0200
+Subject: [PATCH] Don't use namespace-alias in merge-config.xsl
+
+The build process uses a stylesheet named "merge-config.xsl" to
+merge the content of different XML files and it uses the
+"namespace-alias" element in the following way:
+
+<xsl:namespace-alias stylesheet-prefix="jsf" result-prefix="#default"/>
+
+This generates the following error during the build:
+
+create.runtime.config:
+     [xslt] Processing /home/jhernand/rpmbuild/BUILD/mojarra-2.1.7/jsf-api/doc/standard-html-renderkit.xml to /home/jhernand/rpmbuild/BUILD/mojarra-2.1.7/jsf-ri/merged.xml
+     [xslt] Loading stylesheet /home/jhernand/rpmbuild/BUILD/mojarra-2.1.7/jsf-ri/conf/xslt/merge-config.xsl
+     [xslt] /home/jhernand/rpmbuild/BUILD/mojarra-2.1.7/jsf-ri/conf/xslt/merge-config.xsl:50:76: Error! The result-prefix attribute of an xsl:namespace-alias element has the value '#default', but there is no declaration of the default namespace in scope for the element
+     [xslt] /home/jhernand/rpmbuild/BUILD/mojarra-2.1.7/jsf-ri/conf/xslt/merge-config.xsl:0:0: Fatal Error! java.lang.NullPointerException Cause: java.lang.NullPointerException
+     [xslt] Failed to process /home/jhernand/rpmbuild/BUILD/mojarra-2.1.7/jsf-api/doc/standard-html-renderkit.xml
+
+The only way I find to avoid this is to remove the
+"namespace-alias" element. As far as I can tell the content of the
+"jsf-ri-runtime.xml" file is not affected.
+---
+ jsf-ri/conf/xslt/merge-config.xsl |    1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/jsf-ri/conf/xslt/merge-config.xsl b/jsf-ri/conf/xslt/merge-config.xsl
+index 32b6bb2..5a2c397 100644
+--- a/jsf-ri/conf/xslt/merge-config.xsl
++++ b/jsf-ri/conf/xslt/merge-config.xsl
+@@ -47,7 +47,6 @@
+     <xsl:output method="xml" indent="yes"/>
+ 
+     <xsl:strip-space elements="*"/>
+-    <xsl:namespace-alias stylesheet-prefix="jsf" result-prefix="#default"/>
+ 
+     <xsl:variable name="source" select="document('../../resources/jsf-ri-config.xml')"/>
+ 
+-- 
+1.7.10.4
+

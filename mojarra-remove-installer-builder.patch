@@ -1,0 +1,50 @@
+diff --git a/build.xml b/build.xml
+index 32b4103..fe990da 100644
+--- a/build.xml
++++ b/build.xml
+@@ -501,11 +501,6 @@
+         <zip destfile="${basedir}/mojarra-samples.zip"
+              basedir="${basedir}/samples"/>
+         <delete dir="samples"/>
+-
+-        <installerBuilder
+-              classFile="${dist.dir}/mojarra-samples.class"
+-              licenseFile="${LICENSEFILE}"
+-              zipFile="${basedir}/mojarra-samples.zip"/>
+     </target>
+ 
+     <target name="updatecenter2" depends="main">
+diff --git a/common/ant/common.xml b/common/ant/common.xml
+index da8e10c..8c18887 100644
+--- a/common/ant/common.xml
++++ b/common/ant/common.xml
+@@ -59,12 +59,6 @@
+         </classpath>
+     </taskdef>
+ 
+-    <taskdef name="installerBuilder" classname="org.jvnet.poormans_installer.builder.BuilderTask">
+-        <classpath>
+-            <pathelement location="${jsf.build.home}/common/lib/installer-builder.jar"/>
+-            <pathelement location="${jsf.build.home}/common/lib/sfx4j-1.0.jar"/>
+-        </classpath>
+-    </taskdef>
+     <path id="maven-ant-tasks.classpath" path="${jsf.build.home}/common/lib/maven-ant-tasks-2.0.10.jar" />
+       <typedef resource="org/apache/maven/artifact/ant/antlib.xml"
+                uri="antlib:org.apache.maven.artifact.ant"
+diff --git a/common/ant/source-build-setup.xml b/common/ant/source-build-setup.xml
+index f2cfad5..b01d804 100644
+--- a/common/ant/source-build-setup.xml
++++ b/common/ant/source-build-setup.xml
+@@ -59,12 +59,6 @@
+         </classpath>
+     </taskdef>
+ 
+-    <taskdef name="installerBuilder" classname="org.jvnet.poormans_installer.builder.BuilderTask">
+-        <classpath>
+-            <pathelement location="${jsf.build.home}/common/lib/installer-builder.jar"/>
+-            <pathelement location="${jsf.build.home}/common/lib/sfx4j-1.0.jar"/>
+-        </classpath>
+-    </taskdef>
+     <path id="maven-ant-tasks.classpath" path="${jsf.build.home}/common/lib/maven-ant-tasks-2.0.10.jar" />
+       <typedef resource="org/apache/maven/artifact/ant/antlib.xml"
+                uri="antlib:org.apache.maven.artifact.ant"

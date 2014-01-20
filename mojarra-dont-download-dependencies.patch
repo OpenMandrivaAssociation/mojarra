@@ -1,0 +1,504 @@
+diff --git a/common/ant/dependencies.xml b/common/ant/dependencies.xml
+index f7de676..f0cdbce 100644
+--- a/common/ant/dependencies.xml
++++ b/common/ant/dependencies.xml
+@@ -160,499 +160,6 @@
+ 
+ 
+     <target name="update" description="Download project dependencies">
+-
+-        <if>
+-            <not>
+-                <isset property="build.source"/>
+-            </not>
+-            <then>
+-                <mkdir dir="${dependency.base.dir}/downloads"/>
+-                <mkdir dir="${dependency.jar.dir}"/>
+-            </then>
+-        </if>
+-
+-        <!-- setup the proxy if necessary -->
+-        <if>
+-            <and>
+-                <length string="${http.proxy.host}" when="greater" length="0"/>
+-                <length string="${http.proxy.port}" when="greater" length="0"/>
+-            </and>
+-            <then>
+-                <setproxy proxyhost="${http.proxy.host}"
+-                          proxyport="${http.proxy.port}"/>
+-            </then>
+-        </if>
+-
+-        <!-- GLASSFISH ANT JAR -->
+-        <if>
+-            <not>
+-                <available file="${gf-ant.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="http://download.java.net/maven/glassfish/org/glassfish/ant-tasks/${gf-ant.version}/ant-tasks-${gf-ant.version}.jar"
+-                     dest="${gf-ant.jar}"
+-                     usetimestamp="true"/>
+-            </then>
+-        </if>
+-        
+-        <!-- JUNIT -->
+-        <if>
+-            <and>
+-            <not>
+-                <available file="${junit.jar}" property="ignored"/>
+-            </not>
+-                <not>
+-                    <isset property="build.source"/>
+-                </not>
+-            </and>
+-            <then>
+-                <get src="${java.net.maven2}/junit/junit/${junit.version}/junit-${junit.version}.jar"
+-                     dest="${junit.jar}"
+-                     usetimestamp="true"/>
+-            </then>
+-        </if>
+-
+-        <!-- HTMLUNIT -->
+-        <!--
+-        This one needs a ton of extras, so we have to do this one like this or
+-        add a bunch more deps.  Maybe another day... :)
+-        -->
+-        <if>
+-            <and>
+-                <not>
+-                    <available file="${htmlunit.home}" property="ignored"/>
+-                </not>
+-                <not>
+-                    <isset property="build.source"/>
+-                </not>
+-            </and>
+-            <then>
+-                <get src="http://downloads.sourceforge.net/htmlunit/htmlunit-${htmlunit.version}.zip"
+-                     dest="${dependency.base.dir}/downloads/htmlunit-${htmlunit.version}.zip"
+-                     usetimestamp="true"/>
+-                <unzip
+-                        src="${dependency.base.dir}/downloads/htmlunit-${htmlunit.version}.zip"
+-                        dest="${dependency.base.dir}"/>
+-            </then>
+-        </if>
+-
+-        <!-- YUI Compressor -->
+-        <if>
+-            <and>
+-                <not>
+-                    <available file="${yuicompressor.home}" property="ignored"/>
+-                </not>
+-                <not>
+-                    <isset property="build.source"/>
+-                </not>
+-            </and>
+-            <then>
+-                <get src="http://www.julienlecomte.net/yuicompressor/yuicompressor-${yuicompressor.version}.zip"
+-                     dest="${dependency.base.dir}/downloads/yuicompressor-${yuicompressor.version}.zip"
+-                     usetimestamp="true"/>
+-                <unzip
+-                        src="${dependency.base.dir}/downloads/yuicompressor-${yuicompressor.version}.zip"
+-                        dest="${dependency.base.dir}"/>
+-                <copy tofile="${yuicompressor.jar}"
+-                      file="${yuicompressor.home}/build/yuicompressor-${yuicompressor.version}.jar"/>
+-            </then>
+-        </if>
+-
+-        <!-- CACTUS -->
+-        <!-- Is this not in a maven repo somewhere? -->
+-        <if>
+-            <and>
+-                <not>
+-                    <available file="${cactus.home}" property="ignored"/>
+-                </not>
+-                <not>
+-                    <isset property="build.source"/>
+-                </not>
+-            </and>
+-            <then>
+-                <get src="http://archive.apache.org/dist/jakarta/cactus/binaries/jakarta-cactus-${cactus.version}.zip"
+-                     dest="${dependency.base.dir}/downloads/jakarta-cactus-${cactus.version}.zip"
+-                     usetimestamp="true"/>
+-                <unzip
+-                        src="${dependency.base.dir}/downloads/jakarta-cactus-${cactus.version}.zip"
+-                        dest="${dependency.base.dir}"/>
+-            </then>
+-        </if>
+-
+-        <!-- TAGLIBDOC -->
+-        <if>
+-            <and>
+-            <not>
+-                <available file="${tlddoc.jar}" property="ignored"/>
+-            </not>
+-                <not>
+-                    <isset property="build.source"/>
+-                </not>
+-            </and>
+-            <then>
+-                <get src="${central.maven2}/taglibrarydoc/tlddoc/${taglibdoc.version}/tlddoc-${taglibdoc.version}.jar"
+-                     dest="${tlddoc.jar}"
+-                     usetimestamp="true"/>
+-
+-            </then>
+-        </if>
+-
+-        <!-- JSDOC -->
+-        <if>
+-            <and>
+-                <not>
+-                    <available file="${jsdoc.home}" property="ignored"/>
+-                </not>
+-                <not>
+-                    <isset property="build.source"/>
+-                </not>
+-            </and>
+-            <then>
+-                <get src="http://jsdoc-toolkit.googlecode.com/files/jsdoc_toolkit-${jsdoc.version}.zip"
+-                     dest="${dependency.base.dir}/downloads/jsdoc_toolkit-${jsdoc.version}.zip"
+-                     usetimestamp="true"/>
+-                <unzip
+-                        src="${dependency.base.dir}/downloads/jsdoc_toolkit-${jsdoc.version}.zip"
+-                        dest="${dependency.base.dir}"/>
+-            </then>
+-        </if>
+-
+-
+-        <!-- MAVEN REPOSITORY IMPORTER -->
+-        <if>
+-            <and>
+-                <not>
+-                    <available file="${maven.repository.importer.jar}" property="ignored"/>
+-                </not>
+-                <not>
+-                    <isset property="build.source"/>
+-                </not>
+-            </and>
+-            <then>
+-                <get src="${java.net.maven}/com.sun.wts.tools.mri/jars/maven-repository-importer-${maven.repository.importer.version}.jar"
+-                     dest="${maven.repository.importer.jar}"
+-                     usetimestamp="true"/>
+-
+-            </then>
+-        </if>
+-
+-        <!-- JAVAEE API -->
+-        <if>
+-            <not>
+-                <available file="${javaee-api.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${java.net.maven2}/javax/javaee-api/${javaee-api.version}/javaee-api-${javaee-api.version}.jar"
+-                     dest="${javaee-api.jar}"
+-                     usetimestamp="true"/>
+-
+-            </then>
+-        </if>
+-        <!-- SERVLET API -->
+-        <if>
+-            <not>
+-                <available file="${servlet.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${java.net.maven}/javax.servlet/jars/servlet-api-${servlet.api.version}.jar"
+-                     dest="${servlet.jar}"
+-                     usetimestamp="true"/>
+-
+-            </then>
+-        </if>
+-
+-        <if>
+-            <not>
+-                <available file="${servlet3.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${central.maven2}/org/mortbay/jetty/servlet-api/3.0.20100224/servlet-api-3.0.20100224.jar"
+-                     dest="${servlet3.jar}"
+-                     usetimestamp="true"/>
+-
+-            </then>
+-        </if>
+-
+-
+-        <!-- JSP API -->
+-        <!--
+-        <if>
+-            <not>
+-                <available file="${jsp.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${java.net.maven}/javax.servlet.jsp/jars/jsp-api-${jsp.api.version}.jar"
+-                     dest="${jsp.jar}"
+-                     usetimestamp="true"/>
+-
+-            </then>
+-        </if>
+-        -->
+-        <!-- EL API and IMPL -->
+-        <!--
+-        <if>
+-            <not>
+-                <available file="${el-api.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${java.net.maven}/javax.el/jars/el-api-${el.version}.jar"
+-                     dest="${el-api.jar}"
+-                     usetimestamp="true"/>
+-
+-            </then>
+-        </if>
+-        <if>
+-            <not>
+-                <available file="${el-impl.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${java.net.maven}/el-impl/jars/el-impl-${el.version}.jar"
+-                     dest="${el-impl.jar}"
+-                     usetimestamp="true"/>
+-
+-            </then>
+-        </if>
+-        -->
+-        <!-- JSTL API -->
+-        <if>
+-            <not>
+-                <available file="${jstl.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${java.net.maven}/jstl/jars/jstl-${jstl.api.version}.jar"
+-                     dest="${jstl.jar}"
+-                     usetimestamp="true"/>
+-
+-            </then>
+-        </if>
+-        <!-- ANNOTATION API -->
+-        <!--
+-        <if>
+-            <not>
+-                <available file="${annotation.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${java.net.maven}/javax.annotation/jars/jsr250-api-${annotation.api.version}.jar"
+-                     dest="${annotation.jar}"
+-                     usetimestamp="true"/>
+-
+-            </then>
+-        </if>
+-        -->
+-        <!-- Portlet -->
+-        <!--
+-        <if>
+-            <not>
+-                <available file="${portlet.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${maven2.mirror}/javax/portlet/portlet-api/${portlet.api.version}/portlet-api-${portlet.api.version}.jar"
+-                     dest="${portlet.jar}"
+-                     usetimestamp="true"/>
+-            </then>
+-        </if>
+-        -->
+-        <!-- Groovy -->       
+-        <if>
+-            <not>
+-                <available file="${groovy.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${codehaus.maven}/org/codehaus/groovy/groovy-all/${groovy.version}/groovy-all-${groovy.version}.jar"
+-                     dest="${groovy.jar}"
+-                     usetimestamp="true"/>
+-            </then>
+-        </if>        
+-
+-        <!-- Trinidad -->
+-        <echo>${trinidad.zip}</echo>
+-
+-        <if>
+-            <not>
+-                <available file="${trinidad.zip}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="http://myfaces.apache.org/dist/binaries/trinidad-${trinidad.version}-dist.zip"
+-                     dest="${trinidad.zip}"
+-                     usetimestamp="true"/>
+-
+-                <unzip
+-                        src="${dependency.base.dir}/downloads/trinidad-${trinidad.version}-dist.zip"
+-                        dest="${dependency.base.dir}"/>
+-            </then>
+-        </if>
+-
+-        <!-- JSR 330 -->
+-        <if>
+-            <not>
+-                <available file="${javax-inject.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${redhat.maven2}/javax/inject/javax.inject/${javax-inject.version}/javax.inject-${javax-inject.version}.jar"
+-                     dest="${javax-inject.jar}"
+-                     usetimestamp="true"/>
+-            </then>
+-        </if>
+-        <!-- JSR 299 -->
+-        <if>
+-            <not>
+-                <available file="${javax-enterprise.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${central.maven2}/javax/enterprise/cdi-api/${javax-enterprise.version}/cdi-api-${javax-enterprise.version}.jar"
+-                     dest="${javax-enterprise.jar}"
+-                     usetimestamp="true"/>
+-            </then>
+-        </if>
+-        <!-- JSR 303 -->
+-        <!--
+-        <if>
+-            <not>
+-                <available file="${validation-api.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${redhat.maven2}/javax/validation/validation-api/${validation.version}/validation-api-${validation.version}.jar"
+-                     dest="${validation-api.jar}"
+-                     usetimestamp="true"/>
+-            </then>
+-        </if>
+-        -->
+-        <!-- buid commons from source -->
+-
+-        <!--  comment out source build download of sun commons
+-
+-        <echo>starting commons and build.source ${build.source}</echo>
+-        <if>
+-            <equals arg1="${build.source}" arg2="true"/>
+-            <then>
+-                <echo>build from source</echo>
+-                <mkdir dir="${external.dir}"/>
+-
+-                <exec executable="svn" dir="${external.dir}" failonerror="true">
+-                    <arg line="checkout"/>
+-                    <arg line="${commons.logging.url}"/>
+-                    <arg line="commons-logging"/>
+-                </exec>
+-
+-                <exec executable="svn" dir="${external.dir}" failonerror="true">
+-                    <arg line="checkout"/>
+-                    <arg line="${commons.collections.url}"/>
+-                    <arg line="commons-collections"/>
+-                </exec>
+-
+-                <exec executable="svn" dir="${external.dir}" failonerror="true">
+-                    <arg line="checkout"/>
+-                    <arg line="${commons.beanutils.url}"/>
+-                    <arg line="commons-beanutils"/>
+-                </exec>
+-
+-                <exec executable="svn" dir="${external.dir}" failonerror="true">
+-                    <arg line="checkout"/>
+-                    <arg line="${commons.digester.url}"/>
+-                    <arg line="commons-digester"/>
+-                </exec>
+-
+-                <ant antfile="${external.dir}/commons-logging/build.xml"
+-                     target="dist"
+-                     dir="${external.dir}/commons-logging"
+-                     inheritAll="false" />
+-
+-                <ant antfile="${external.dir}/commons-collections/build.xml"
+-                     target="dist"
+-                     dir="${external.dir}/commons-collections"
+-                     inheritAll="false">
+-                    <property name="ant.build.javac.source" value="1.4"/>
+-                </ant>
+-
+-                <ant antfile="${external.dir}/commons-beanutils/build.xml"
+-                     target="dist"
+-                     dir="${external.dir}/commons-beanutils"
+-                     inheritAll="false">
+-                    <property name="commons-collections.home"
+-                              value="${external.dir}/commons-collections/dist"/>
+-                    <property name="commons-collections.jar" value="${external.dir}/commons-collections/dist/commons-collections.jar"/>
+-                    <property name="commons-logging.home" value="${external.dir}/commons-logging/dist"/>
+-                    <property name="commons-logging.jar" value="${external.dir}/commons-logging/dist/commons-logging.jar"/>
+-                </ant>
+-
+-                <ant antfile="${external.dir}/commons-digester/build.xml"
+-                     target="dist"
+-                     dir="${external.dir}/commons-digester"
+-                     inheritAll="false">
+-                    <property name="commons-collections.home"
+-                              value="${external.dir}/commons-collections/dist"/>
+-                    <property name="commons-collections.jar" value="${external.dir}/commons-collections/dist/commons-collections.jar"/>
+-                    <property name="commons-logging.home" value="${external.dir}/commons-logging/dist"/>
+-                    <property name="commons-logging.jar" value="${external.dir}/commons-logging/dist/commons-logging.jar"/>
+-                    <property name="commons-beanutils.home" value="${external.dir}/commons-beanutils/dist"/>
+-                    <property name="commons-beanutils.jar" value="${external.dir}/commons-beanutils/dist/commons-beanutils.jar"/>
+-                </ant>
+-                <copy file="${external.dir}/commons-logging/dist/commons-logging.jar" tofile="${commons.logging.jar}"/>
+-                <copy file="${external.dir}/commons-collections/dist/commons-collections.jar" tofile="${commons.collections.jar}"/>
+-                <copy file="${external.dir}/commons-beanutils/dist/commons-beanutils.jar" tofile="${commons.beanutils.jar}"/>
+-                <copy file="${external.dir}/commons-digester/dist/commons-digester.jar" tofile="${commons.digester.jar}"/>
+-
+-            </then>
+-            <else>
+-            -->
+-
+-                <!-- BEANUTILS -->
+-                <!--
+-                <if>
+-                    <not>
+-                        <available file="${commons-beanutils.jar}" property="ignored"/>
+-                    </not>
+-                    <then>
+-                        <echo> get beanutils</echo>
+-                        <get src="http://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/${beanutils.version}/commons-beanutils-${beanutils.version}.jar"
+-                             dest="${commons-beanutils.jar}"
+-                             usetimestamp="true"/>
+-                    </then>
+-                </if>
+-                -->
+-                <!-- DIGESTER -->
+-                <!--
+-                <if>
+-                    <not>
+-                        <available file="${commons-digester.jar}" property="ignored"/>
+-                    </not>
+-                    <then>
+-                        <get src="http://repo1.maven.org/maven2/commons-digester/commons-digester/${digester.version}/commons-digester-${digester.version}.jar"
+-                             dest="${commons-digester.jar}"
+-                             usetimestamp="true"/>
+-                    </then>
+-                </if>
+-                -->
+-                <!-- COLLECTIONS -->
+-                <!--
+-                <if>
+-                    <not>
+-                        <available file="${commons-collections.jar}" property="ignored"/>
+-                    </not>
+-                    <then>
+-                        <get src="http://repo1.maven.org/maven2/commons-collections/commons-collections/${collections.version}/commons-collections-${collections.version}.jar"
+-                             dest="${commons-collections.jar}"
+-                             usetimestamp="true"/>
+-                    </then>
+-                </if>
+-                -->
+-                <!-- LOGGING_API -->
+-                <!--
+-                <if>
+-                    <not>
+-                        <available file="${commons-logging.jar}" property="ignored"/>
+-                    </not>
+-                    <then>
+-                        <get src="http://repo1.maven.org/maven2/commons-logging/commons-logging/${logging.version}/commons-logging-${logging.version}.jar"
+-                             dest="${commons-logging.jar}"
+-                             usetimestamp="true"/>
+-                    </then>
+-                </if>
+-                -->
+-        <!-- comment out source build of sun commons
+-            </else>
+-        </if>
+-        -->
+     </target>
+ 
+ 

@@ -1,0 +1,25 @@
+diff --git a/jsf-tools/pom.xml b/jsf-tools/pom.xml
+index 5068b69..06c0c9a 100644
+--- a/jsf-tools/pom.xml
++++ b/jsf-tools/pom.xml
+@@ -101,7 +101,7 @@
+       <activation>
+         <property>
+           <name>java.vendor</name>
+-          <value>Sun Microsystems Inc.</value>
++          <value>Oracle Corporation</value>
+         </property>
+       </activation>
+       <dependencies>
+diff --git a/jsf-tools/src/main/java/com/sun/faces/tools/StripClassesForApiJar.java b/jsf-tools/src/main/java/com/sun/faces/tools/StripClassesForApiJar.java
+index 4113de9..7f00c41 100644
+--- a/jsf-tools/src/main/java/com/sun/faces/tools/StripClassesForApiJar.java
++++ b/jsf-tools/src/main/java/com/sun/faces/tools/StripClassesForApiJar.java
+@@ -181,7 +181,6 @@ public class StripClassesForApiJar extends AbstractProcessor {
+         com.sun.tools.javac.main.JavaCompiler compiler = com.sun.tools.javac.main.JavaCompiler.instance(task.getContext());
+         ClassReader reader = ClassReader.instance(task.getContext());
+         ClassWriter writer = ClassWriter.instance(task.getContext());
+-        Name.Table names = Name.Table.instance(task.getContext());
+         Type.moreInfo = true;
+         Pool pool = new Pool();
+ 	ClassSymbol cs = null;

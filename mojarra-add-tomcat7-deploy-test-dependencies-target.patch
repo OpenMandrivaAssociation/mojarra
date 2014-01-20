@@ -1,0 +1,14 @@
+diff --git a/common/ant/tomcat7/container.xml b/common/ant/tomcat7/container.xml
+index bc7b40c..04a8c38 100644
+--- a/common/ant/tomcat7/container.xml
++++ b/common/ant/tomcat7/container.xml
+@@ -144,6 +144,9 @@
+         <copy overwrite="true" file="${jstl.jar}" todir="${container.home}/lib"/>
+     </target>
+ 
++    <target name="container.deploy.test.dependencies"
++            description="Deploy any container level dependencies to the container.">
++    </target>
+ 
+     <target name="container.start"
+             description="Start the Tomcat container">

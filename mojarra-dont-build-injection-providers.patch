@@ -1,0 +1,39 @@
+diff --git a/jsf-ri/build-pre-maven-rename.xml b/jsf-ri/build-pre-maven-rename.xml
+index d668084..aac1322 100644
+--- a/jsf-ri/build-pre-maven-rename.xml
++++ b/jsf-ri/build-pre-maven-rename.xml
+@@ -377,8 +377,6 @@
+               toDir="${build.classes.dir}/com/sun/faces"/>
+         <copy file="conf/xslt/facelets1_0-2_0toSchema.xsl"
+               toDir="${build.classes.dir}/com/sun/faces"/>
+-        <unzip src="${jsf.build.home}/lib/injectionproviders.jar"
+-               dest="${build.classes.dir}"/>
+         <copy todir="${build.classes.dir}/META-INF">
+             <fileset dir="${conf.share.dir}">
+                 <include name="jsf_core.tld"/>
+diff --git a/jsf-ri/build-source.xml b/jsf-ri/build-source.xml
+index c0380a5..5f7195c 100644
+--- a/jsf-ri/build-source.xml
++++ b/jsf-ri/build-source.xml
+@@ -344,8 +344,6 @@
+               toDir="${build.classes.dir}/com/sun/faces"/>
+         <copy file="conf/xslt/facelets1_0-2_0toSchema.xsl"
+               toDir="${build.classes.dir}/com/sun/faces"/>
+-        <unzip src="${jsf.build.home}/lib/injectionproviders.jar"
+-               dest="${build.classes.dir}"/>
+         <copy todir="${build.classes.dir}/META-INF">
+             <fileset dir="${conf.share.dir}">
+                 <include name="jsf_core.tld"/>
+diff --git a/jsf-ri/build.xml b/jsf-ri/build.xml
+index 50b37be..be5f799 100644
+--- a/jsf-ri/build.xml
++++ b/jsf-ri/build.xml
+@@ -371,8 +371,6 @@
+               toDir="${build.classes.dir}/com/sun/faces"/>
+         <copy file="conf/xslt/facelets1_0-2_0toSchema.xsl"
+               toDir="${build.classes.dir}/com/sun/faces"/>
+-        <unzip src="${jsf.build.home}/lib/injectionproviders.jar"
+-               dest="${build.classes.dir}"/>
+         <unzip src="${jsf-api-intermediate.jar}"
+                dest="${build.classes.dir}">
+           <patternset>
