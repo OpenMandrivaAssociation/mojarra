@@ -1,8 +1,9 @@
 %{?_javapackages_macros:%_javapackages_macros}
 Name:          mojarra
 Version:       2.1.7
-Release:       8.0%{?dist}
+Release:       10.1
 Summary:       JSF Reference Implementation
+Group:         Development/Java
 License:       CDDL or GPLv2 with exceptions
 URL:           http://javaserverfaces.java.net
 # svn export https://svn.java.net/svn/mojarra~svn/tags/2.1.7/ mojarra-2.1.7
@@ -50,6 +51,9 @@ Patch9:        %{name}-dont-bundle-api.patch
 # Don't use the namespace-alias XLST element in the stylesheet
 # that merges the jsf-ri-runtime.xml file:
 Patch10:       %{name}-dont-use-namespace-alias.patch
+
+# jdk8 fix
+Patch11:       mojarra-jdk8.patch
 
 BuildArch: noarch
 
@@ -106,6 +110,7 @@ This package contains the API documentation for %{name}.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 # Remove binaries (I know this is already mentinoned in the instructions to
 # build the source tarball above, but it doesn't hurt):
@@ -220,7 +225,7 @@ cp -rp jsf-api/build/javadocs/* %{buildroot}%{_javadocdir}/%{name}/jsf-impl/.
 %files
 %{_javadir}/%{name}
 %{_mavenpomdir}/*
-%{_mavendepmapfragdir}/*
+%{_datadir}/maven-metadata/*
 %doc LICENSE
 %doc docs/index.html
 %doc docs/releasenotes.html

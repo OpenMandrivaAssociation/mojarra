@@ -1,0 +1,20 @@
+--- mojarra-2.1.7/jsf-tools/src/main/java/com/sun/faces/tools/StripClassesForApiJar.java.orig	2014-12-30 19:52:59.121781522 +0000
++++ mojarra-2.1.7/jsf-tools/src/main/java/com/sun/faces/tools/StripClassesForApiJar.java	2014-12-30 19:56:01.570770407 +0000
+@@ -49,6 +49,7 @@
+ import com.sun.tools.javac.code.Symbol.*;
+ import com.sun.tools.javac.code.Flags;
+ import com.sun.tools.javac.code.Type;
++import com.sun.tools.javac.code.Types;
+ import com.sun.tools.javac.jvm.ClassReader;
+ import com.sun.tools.javac.jvm.ClassWriter;
+ import com.sun.tools.javac.jvm.Pool;
+@@ -182,7 +183,8 @@
+         ClassReader reader = ClassReader.instance(task.getContext());
+         ClassWriter writer = ClassWriter.instance(task.getContext());
+         Type.moreInfo = true;
+-        Pool pool = new Pool();
++        Types types = Types.instance(task.getContext());
++        Pool pool = new Pool(types);
+ 	ClassSymbol cs = null;
+         try {
+             for (JavaFileObject file : fm.list(jarLocation, "", EnumSet.of(CLASS), true)) {
