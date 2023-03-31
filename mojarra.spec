@@ -1,7 +1,7 @@
 %{?_javapackages_macros:%_javapackages_macros}
 Name:          mojarra
 Version:       2.1.7
-Release:       10.3
+Release:       10.4
 Summary:       JSF Reference Implementation
 Group:         Development/Java
 License:       CDDL or GPLv2 with exceptions
