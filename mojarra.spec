@@ -5,7 +5,7 @@ Release:       10.4
 Summary:       JSF Reference Implementation
 Group:         Development/Java
 License:       CDDL or GPLv2 with exceptions
-URL:           http://javaserverfaces.java.net
+URL:           https://javaserverfaces.java.net
 # svn export https://svn.java.net/svn/mojarra~svn/tags/2.1.7/ mojarra-2.1.7
 # find mojarra-2.1.7/ -name '*.class' -delete
 # find mojarra-2.1.7/ -name '*.jar' -delete
