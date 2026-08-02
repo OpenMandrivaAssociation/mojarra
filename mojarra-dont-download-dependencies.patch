@@ -1,8 +1,7 @@
 diff --git a/common/ant/dependencies.xml b/common/ant/dependencies.xml
-index f7de676..f0cdbce 100644
---- a/common/ant/dependencies.xml
-+++ b/common/ant/dependencies.xml
-@@ -160,499 +160,6 @@
+--- a/common/ant/dependencies.xml	2016-02-04 03:54:54.000000000 +0100
++++ b/common/ant/dependencies.xml	2026-08-02 22:56:32.027927601 +0200
+@@ -159,551 +159,6 @@
  
  
      <target name="update" description="Download project dependencies">
@@ -35,7 +34,7 @@ index f7de676..f0cdbce 100644
 -                <available file="${gf-ant.jar}" property="ignored"/>
 -            </not>
 -            <then>
--                <get src="http://download.java.net/maven/glassfish/org/glassfish/ant-tasks/${gf-ant.version}/ant-tasks-${gf-ant.version}.jar"
+-                <get src="${central.maven2}/org/glassfish/ant-tasks/${gf-ant.version}/ant-tasks-${gf-ant.version}.jar"
 -                     dest="${gf-ant.jar}"
 -                     usetimestamp="true"/>
 -            </then>
@@ -52,7 +51,7 @@ index f7de676..f0cdbce 100644
 -                </not>
 -            </and>
 -            <then>
--                <get src="${java.net.maven2}/junit/junit/${junit.version}/junit-${junit.version}.jar"
+-                <get src="${central.maven2}/junit/junit/${junit.version}/junit-${junit.version}.jar"
 -                     dest="${junit.jar}"
 -                     usetimestamp="true"/>
 -            </then>
@@ -82,25 +81,62 @@ index f7de676..f0cdbce 100644
 -            </then>
 -        </if>
 -
--        <!-- YUI Compressor -->
+-        <!-- XS3P -->
 -        <if>
 -            <and>
 -                <not>
--                    <available file="${yuicompressor.home}" property="ignored"/>
+-                    <available file="${xs3p.home}" property="ignored"/>
 -                </not>
 -                <not>
 -                    <isset property="build.source"/>
 -                </not>
 -            </and>
 -            <then>
--                <get src="http://www.julienlecomte.net/yuicompressor/yuicompressor-${yuicompressor.version}.zip"
+-                <get src="http://downloads.sourceforge.net/project/xs3p/xs3p-${xs3p.version}.zip"
+-                     dest="${dependency.base.dir}/downloads/xs3p-${xs3p.version}.zip"
+-                     usetimestamp="true"/>
+-                <mkdir dir="${xs3p.home}" />
+-                <unzip
+-                        src="${dependency.base.dir}/downloads/xs3p-${xs3p.version}.zip"
+-                        dest="${xs3p.home}"/>
+-            </then>
+-        </if>
+-
+-        <if>
+-            <and>
+-                <not>
+-                    <os family="windows"/>
+-                </not>
+-                <not>
+-                    <isset property="build.source"/>
+-                </not>
+-            </and>
+-            <then>
+-              <patch patchfile="${jsf.build.home}/common/ant/bin/xs3p-disable-output-escaping.patch"
+-                     originalfile="${xs3p.home}/xs3p.xsl" failonerror="false"
+-                     dir="${xs3p.home}"/>
+-            </then>
+-        </if>
+-
+-        <!-- YUI Compressor -->
+-        <if>
+-            <and>
+-                <not>
+-                    <available file="${yuicompressor.jar}" property="ignored"/>
+-                </not>
+-                <not>
+-                    <isset property="build.source"/>
+-                </not>
+-            </and>
+-            <then>
+-                <get src="https://github.com/yui/yuicompressor/releases/download/v${yuicompressor.version}/yuicompressor-${yuicompressor.version}.zip"
 -                     dest="${dependency.base.dir}/downloads/yuicompressor-${yuicompressor.version}.zip"
 -                     usetimestamp="true"/>
 -                <unzip
 -                        src="${dependency.base.dir}/downloads/yuicompressor-${yuicompressor.version}.zip"
 -                        dest="${dependency.base.dir}"/>
 -                <copy tofile="${yuicompressor.jar}"
--                      file="${yuicompressor.home}/build/yuicompressor-${yuicompressor.version}.jar"/>
+-                      file="${dependency.base.dir}/yuicompressor-${yuicompressor.version}.jar"/>
 -            </then>
 -        </if>
 -
@@ -143,6 +179,25 @@ index f7de676..f0cdbce 100644
 -            </then>
 -        </if>
 -
+-        <!-- VDLDOC -->
+-        <if>
+-            <and>
+-            <not>
+-                <available file="${vdldoc.jar}" property="ignored"/>
+-            </not>
+-                <not>
+-                    <isset property="build.source"/>
+-                </not>
+-            </and>
+-            <then>
+-                <get src="http://vdldoc.googlecode.com/files/vdldoc-${vdldoc.version}.jar"
+-                     dest="${vdldoc.jar}"
+-                     usetimestamp="true"/>
+-
+-            </then>
+-        </if>
+-
+-
 -        <!-- JSDOC -->
 -        <if>
 -            <and>
@@ -175,7 +230,7 @@ index f7de676..f0cdbce 100644
 -                </not>
 -            </and>
 -            <then>
--                <get src="${java.net.maven}/com.sun.wts.tools.mri/jars/maven-repository-importer-${maven.repository.importer.version}.jar"
+-                <get src="${central.maven2}/com/sun/wts/tools/mri/maven-repository-importer/${maven.repository.importer.version}/maven-repository-importer-${maven.repository.importer.version}.jar"
 -                     dest="${maven.repository.importer.jar}"
 -                     usetimestamp="true"/>
 -
@@ -188,19 +243,33 @@ index f7de676..f0cdbce 100644
 -                <available file="${javaee-api.jar}" property="ignored"/>
 -            </not>
 -            <then>
--                <get src="${java.net.maven2}/javax/javaee-api/${javaee-api.version}/javaee-api-${javaee-api.version}.jar"
+-                <get src="${central.maven2}/javax/javaee-api/${javaee-api.version}/javaee-api-${javaee-api.version}.jar"
 -                     dest="${javaee-api.jar}"
 -                     usetimestamp="true"/>
 -
 -            </then>
 -        </if>
+-        <!-- CDI API -->
+-        <if>
+-            <not>
+-                <available file="${cdi-api.jar}" property="ignored"/>
+-            </not>
+-            <then>
+-                <get src="${central.maven2}/javax/enterprise/cdi-api/${cdi-api.version}/cdi-api-${cdi-api.version}.jar"
+-                     dest="${cdi-api.jar}"
+-                     usetimestamp="true"/>
+-
+-            </then>
+-        </if>
+-
+-
 -        <!-- SERVLET API -->
 -        <if>
 -            <not>
 -                <available file="${servlet.jar}" property="ignored"/>
 -            </not>
 -            <then>
--                <get src="${java.net.maven}/javax.servlet/jars/servlet-api-${servlet.api.version}.jar"
+-                <get src="${central.maven2}/javax/servlet/servlet-api/${servlet.api.version}/servlet-api-${servlet.api.version}.jar"
 -                     dest="${servlet.jar}"
 -                     usetimestamp="true"/>
 -
@@ -265,7 +334,7 @@ index f7de676..f0cdbce 100644
 -                <available file="${jstl.jar}" property="ignored"/>
 -            </not>
 -            <then>
--                <get src="${java.net.maven}/jstl/jars/jstl-${jstl.api.version}.jar"
+-                <get src="${central.maven2}/jstl/jstl/${jstl.api.version}/jstl-${jstl.api.version}.jar"
 -                     dest="${jstl.jar}"
 -                     usetimestamp="true"/>
 -
@@ -304,29 +373,11 @@ index f7de676..f0cdbce 100644
 -                <available file="${groovy.jar}" property="ignored"/>
 -            </not>
 -            <then>
--                <get src="${codehaus.maven}/org/codehaus/groovy/groovy-all/${groovy.version}/groovy-all-${groovy.version}.jar"
+-                <get src="${central.maven2}/org/codehaus/groovy/groovy-all/${groovy.version}/groovy-all-${groovy.version}.jar"
 -                     dest="${groovy.jar}"
 -                     usetimestamp="true"/>
 -            </then>
 -        </if>        
--
--        <!-- Trinidad -->
--        <echo>${trinidad.zip}</echo>
--
--        <if>
--            <not>
--                <available file="${trinidad.zip}" property="ignored"/>
--            </not>
--            <then>
--                <get src="http://myfaces.apache.org/dist/binaries/trinidad-${trinidad.version}-dist.zip"
--                     dest="${trinidad.zip}"
--                     usetimestamp="true"/>
--
--                <unzip
--                        src="${dependency.base.dir}/downloads/trinidad-${trinidad.version}-dist.zip"
--                        dest="${dependency.base.dir}"/>
--            </then>
--        </if>
 -
 -        <!-- JSR 330 -->
 -        <if>
@@ -334,7 +385,7 @@ index f7de676..f0cdbce 100644
 -                <available file="${javax-inject.jar}" property="ignored"/>
 -            </not>
 -            <then>
--                <get src="${redhat.maven2}/javax/inject/javax.inject/${javax-inject.version}/javax.inject-${javax-inject.version}.jar"
+-                <get src="${central.maven2}/javax/inject/javax.inject/${javax-inject.version}/javax.inject-${javax-inject.version}.jar"
 -                     dest="${javax-inject.jar}"
 -                     usetimestamp="true"/>
 -            </then>

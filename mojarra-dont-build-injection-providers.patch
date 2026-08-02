@@ -1,8 +1,7 @@
 diff --git a/jsf-ri/build-pre-maven-rename.xml b/jsf-ri/build-pre-maven-rename.xml
-index d668084..aac1322 100644
---- a/jsf-ri/build-pre-maven-rename.xml
-+++ b/jsf-ri/build-pre-maven-rename.xml
-@@ -377,8 +377,6 @@
+--- a/jsf-ri/build-pre-maven-rename.xml	2026-08-02 22:56:32.977497931 +0200
++++ b/jsf-ri/build-pre-maven-rename.xml	2026-08-02 22:56:33.202947210 +0200
+@@ -378,8 +378,6 @@
                toDir="${build.classes.dir}/com/sun/faces"/>
          <copy file="conf/xslt/facelets1_0-2_0toSchema.xsl"
                toDir="${build.classes.dir}/com/sun/faces"/>
@@ -12,9 +11,8 @@ index d668084..aac1322 100644
              <fileset dir="${conf.share.dir}">
                  <include name="jsf_core.tld"/>
 diff --git a/jsf-ri/build-source.xml b/jsf-ri/build-source.xml
-index c0380a5..5f7195c 100644
---- a/jsf-ri/build-source.xml
-+++ b/jsf-ri/build-source.xml
+--- a/jsf-ri/build-source.xml	2026-08-02 22:56:32.977762264 +0200
++++ b/jsf-ri/build-source.xml	2026-08-02 22:56:33.203143813 +0200
 @@ -344,8 +344,6 @@
                toDir="${build.classes.dir}/com/sun/faces"/>
          <copy file="conf/xslt/facelets1_0-2_0toSchema.xsl"
@@ -25,10 +23,9 @@ index c0380a5..5f7195c 100644
              <fileset dir="${conf.share.dir}">
                  <include name="jsf_core.tld"/>
 diff --git a/jsf-ri/build.xml b/jsf-ri/build.xml
-index 50b37be..be5f799 100644
---- a/jsf-ri/build.xml
-+++ b/jsf-ri/build.xml
-@@ -371,8 +371,6 @@
+--- a/jsf-ri/build.xml	2026-08-02 22:56:32.978039068 +0200
++++ b/jsf-ri/build.xml	2026-08-02 22:56:33.203357335 +0200
+@@ -378,8 +378,6 @@
                toDir="${build.classes.dir}/com/sun/faces"/>
          <copy file="conf/xslt/facelets1_0-2_0toSchema.xsl"
                toDir="${build.classes.dir}/com/sun/faces"/>

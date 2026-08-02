@@ -1,13 +1,30 @@
-diff --git a/jsf-tools/pom.xml b/jsf-tools/pom.xml
-index 3dbc22f..5068b69 100644
---- a/jsf-tools/pom.xml
-+++ b/jsf-tools/pom.xml
-@@ -77,7 +77,7 @@
-     </build>
-     <dependencies>
-         <dependency>
--            <groupId>ant</groupId>
-+            <groupId>org.apache.ant</groupId>
-             <artifactId>ant</artifactId>
-             <version>1.7.0</version>
-             <scope>compile</scope>
+diff --git a/test/pom.xml b/test/pom.xml
+--- a/test/pom.xml	2016-02-04 03:54:54.000000000 +0100
++++ b/test/pom.xml	2026-08-02 22:56:32.272868451 +0200
+@@ -312,7 +312,7 @@
+                                 <version>1.0b3</version>
+                                 <exclusions>
+                                     <exclusion>
+-                                        <groupId>ant</groupId>
++                                        <groupId>org.apache.ant</groupId>
+                                         <artifactId>ant</artifactId>
+                                     </exclusion>
+                                 </exclusions>
+@@ -360,7 +360,7 @@
+                                 <version>1.0b3</version>
+                                 <exclusions>
+                                     <exclusion>
+-                                        <groupId>ant</groupId>
++                                        <groupId>org.apache.ant</groupId>
+                                         <artifactId>ant</artifactId>
+                                     </exclusion>
+                                 </exclusions>
+@@ -851,7 +851,7 @@
+                                 <version>1.0b3</version>
+                                 <exclusions>
+                                     <exclusion>
+-                                        <groupId>ant</groupId>
++                                        <groupId>org.apache.ant</groupId>
+                                         <artifactId>ant</artifactId>
+                                     </exclusion>
+                                 </exclusions>

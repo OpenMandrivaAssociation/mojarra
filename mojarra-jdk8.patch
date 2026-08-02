@@ -1,5 +1,6 @@
---- mojarra-2.1.7/jsf-tools/src/main/java/com/sun/faces/tools/StripClassesForApiJar.java.orig	2014-12-30 19:52:59.121781522 +0000
-+++ mojarra-2.1.7/jsf-tools/src/main/java/com/sun/faces/tools/StripClassesForApiJar.java	2014-12-30 19:56:01.570770407 +0000
+diff --git a/jsf-tools/src/main/java/com/sun/faces/tools/StripClassesForApiJar.java b/jsf-tools/src/main/java/com/sun/faces/tools/StripClassesForApiJar.java
+--- a/jsf-tools/src/main/java/com/sun/faces/tools/StripClassesForApiJar.java	2016-02-04 03:54:54.000000000 +0100
++++ b/jsf-tools/src/main/java/com/sun/faces/tools/StripClassesForApiJar.java	2026-08-02 22:56:33.874063698 +0200
 @@ -49,6 +49,7 @@
  import com.sun.tools.javac.code.Symbol.*;
  import com.sun.tools.javac.code.Flags;

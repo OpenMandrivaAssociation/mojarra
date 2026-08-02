@@ -1,18 +1,19 @@
 %{?_javapackages_macros:%_javapackages_macros}
 Name:          mojarra
-Version:       2.1.7
-Release:       10.4
+Version:       2.2.13
+Release:       1
 Summary:       JSF Reference Implementation
 Group:         Development/Java
 License:       CDDL or GPLv2 with exceptions
 URL:           https://javaserverfaces.java.net
-# svn export https://svn.java.net/svn/mojarra~svn/tags/2.1.7/ mojarra-2.1.7
-# find mojarra-2.1.7/ -name '*.class' -delete
-# find mojarra-2.1.7/ -name '*.jar' -delete
-# tar czf mojarra-2.1.7.tgz mojarra-2.1.7
+# Source tarball from https://github.com/javaee/mojarra/archive/refs/tags/2.2.13.tar.gz
+# (directory renamed/retarred as mojarra-2.2.13; strip prebuilt *.class/*.jar)
+# find mojarra-2.2.13/ -name '*.class' -delete
+# find mojarra-2.2.13/ -name '*.jar' -delete
+# tar czf mojarra-2.2.13.tgz mojarra-2.2.13
 Source0:       %{name}-%{version}.tgz
-Source1:       http://repo1.maven.org/maven2/com/sun/faces/jsf-api/2.1.7/jsf-api-2.1.7.pom
-Source2:       http://repo1.maven.org/maven2/com/sun/faces/jsf-impl/2.1.7/jsf-impl-2.1.7.pom
+Source1:       http://repo1.maven.org/maven2/com/sun/faces/jsf-api/2.2.13/jsf-api-2.2.13.pom
+Source2:       http://repo1.maven.org/maven2/com/sun/faces/jsf-impl/2.2.13/jsf-impl-2.2.13.pom
 # Don't use the installer builder as it requires additional dependences and it
 # is only used to build installers, which we don't use:
 Patch0:        %{name}-remove-installer-builder.patch
@@ -98,19 +99,7 @@ This package contains the API documentation for %{name}.
 %prep
 
 # Unpack and patch the original sources:
-%setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
+%autosetup -p1
 
 # Remove binaries (I know this is already mentinoned in the instructions to
 # build the source tarball above, but it doesn't hurt):

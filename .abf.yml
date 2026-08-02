@@ -1,2 +1,4 @@
 sources:
-  "mojarra-2.1.7.tgz": 4c505496c21a8b1879b6c8bb68da6fb79040d5c0
+  jsf-api-2.2.13.pom: 5a83f5b591ff419630f9abd730bfc5733a617b51
+  jsf-impl-2.2.13.pom: 48c7ac85bfc8ca9ecb737980227c0beaadc902ae
+  mojarra-2.2.13.tgz: e95bec27646dd47716b357c8e7b017785671cc3f

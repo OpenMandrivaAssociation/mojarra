@@ -1,14 +1,11 @@
 diff --git a/common/ant/tomcat7/container.xml b/common/ant/tomcat7/container.xml
-index bc7b40c..04a8c38 100644
---- a/common/ant/tomcat7/container.xml
-+++ b/common/ant/tomcat7/container.xml
-@@ -144,6 +144,9 @@
-         <copy overwrite="true" file="${jstl.jar}" todir="${container.home}/lib"/>
+--- a/common/ant/tomcat7/container.xml	2016-02-04 03:54:54.000000000 +0100
++++ b/common/ant/tomcat7/container.xml	2026-08-02 22:56:31.789712438 +0200
+@@ -146,6 +146,7 @@
+ 
+     <target name="container.deploy.test.dependencies"
+             description="Deploy any container level dependencies to the container.">
++        <!-- packaging: no extra container-level test dependencies -->
      </target>
  
-+    <target name="container.deploy.test.dependencies"
-+            description="Deploy any container level dependencies to the container.">
-+    </target>
- 
-     <target name="container.start"
-             description="Start the Tomcat container">
+     <target name="container.undeploy.test.dependencies"

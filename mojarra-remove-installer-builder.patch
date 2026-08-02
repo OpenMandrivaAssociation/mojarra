@@ -1,8 +1,7 @@
 diff --git a/build.xml b/build.xml
-index 32b4103..fe990da 100644
---- a/build.xml
-+++ b/build.xml
-@@ -501,11 +501,6 @@
+--- a/build.xml	2016-02-04 03:54:54.000000000 +0100
++++ b/build.xml	2026-08-02 22:56:31.310815349 +0200
+@@ -554,11 +554,6 @@
          <zip destfile="${basedir}/mojarra-samples.zip"
               basedir="${basedir}/samples"/>
          <delete dir="samples"/>
@@ -15,9 +14,8 @@ index 32b4103..fe990da 100644
  
      <target name="updatecenter2" depends="main">
 diff --git a/common/ant/common.xml b/common/ant/common.xml
-index da8e10c..8c18887 100644
---- a/common/ant/common.xml
-+++ b/common/ant/common.xml
+--- a/common/ant/common.xml	2016-02-04 03:54:54.000000000 +0100
++++ b/common/ant/common.xml	2026-08-02 22:56:31.310895280 +0200
 @@ -59,12 +59,6 @@
          </classpath>
      </taskdef>
@@ -28,13 +26,12 @@ index da8e10c..8c18887 100644
 -            <pathelement location="${jsf.build.home}/common/lib/sfx4j-1.0.jar"/>
 -        </classpath>
 -    </taskdef>
-     <path id="maven-ant-tasks.classpath" path="${jsf.build.home}/common/lib/maven-ant-tasks-2.0.10.jar" />
+     <path id="maven-ant-tasks.classpath" path="${jsf.build.home}/common/lib/maven-ant-tasks-2.1.3.jar" />
        <typedef resource="org/apache/maven/artifact/ant/antlib.xml"
                 uri="antlib:org.apache.maven.artifact.ant"
 diff --git a/common/ant/source-build-setup.xml b/common/ant/source-build-setup.xml
-index f2cfad5..b01d804 100644
---- a/common/ant/source-build-setup.xml
-+++ b/common/ant/source-build-setup.xml
+--- a/common/ant/source-build-setup.xml	2016-02-04 03:54:54.000000000 +0100
++++ b/common/ant/source-build-setup.xml	2026-08-02 22:56:31.310961081 +0200
 @@ -59,12 +59,6 @@
          </classpath>
      </taskdef>
@@ -45,6 +42,6 @@ index f2cfad5..b01d804 100644
 -            <pathelement location="${jsf.build.home}/common/lib/sfx4j-1.0.jar"/>
 -        </classpath>
 -    </taskdef>
-     <path id="maven-ant-tasks.classpath" path="${jsf.build.home}/common/lib/maven-ant-tasks-2.0.10.jar" />
+     <path id="maven-ant-tasks.classpath" path="${jsf.build.home}/common/lib/maven-ant-tasks-2.1.3.jar" />
        <typedef resource="org/apache/maven/artifact/ant/antlib.xml"
                 uri="antlib:org.apache.maven.artifact.ant"

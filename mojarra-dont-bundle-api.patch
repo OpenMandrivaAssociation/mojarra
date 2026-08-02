@@ -1,8 +1,7 @@
 diff --git a/jsf-ri/build.xml b/jsf-ri/build.xml
-index be5f799..e387429 100644
---- a/jsf-ri/build.xml
-+++ b/jsf-ri/build.xml
-@@ -371,12 +371,6 @@
+--- a/jsf-ri/build.xml	2026-08-02 22:56:33.203357335 +0200
++++ b/jsf-ri/build.xml	2026-08-02 22:56:33.426122229 +0200
+@@ -378,12 +378,6 @@
                toDir="${build.classes.dir}/com/sun/faces"/>
          <copy file="conf/xslt/facelets1_0-2_0toSchema.xsl"
                toDir="${build.classes.dir}/com/sun/faces"/>

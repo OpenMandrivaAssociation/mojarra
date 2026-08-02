@@ -1,7 +1,6 @@
 diff --git a/common/ant/common.xml b/common/ant/common.xml
-index 8c18887..199e5d3 100644
---- a/common/ant/common.xml
-+++ b/common/ant/common.xml
+--- a/common/ant/common.xml	2026-08-02 22:56:31.310895280 +0200
++++ b/common/ant/common.xml	2026-08-02 22:56:31.552328655 +0200
 @@ -41,7 +41,7 @@
  
  -->
@@ -15,7 +14,7 @@ index 8c18887..199e5d3 100644
          </classpath>
      </taskdef>
  
--    <path id="maven-ant-tasks.classpath" path="${jsf.build.home}/common/lib/maven-ant-tasks-2.0.10.jar" />
+-    <path id="maven-ant-tasks.classpath" path="${jsf.build.home}/common/lib/maven-ant-tasks-2.1.3.jar" />
 -      <typedef resource="org/apache/maven/artifact/ant/antlib.xml"
 -               uri="antlib:org.apache.maven.artifact.ant"
 -               classpathref="maven-ant-tasks.classpath" />
@@ -24,7 +23,7 @@ index 8c18887..199e5d3 100644
      <!-- Setup the time properties for use with the project -->
      <tstamp/>
      
-@@ -122,82 +116,6 @@
+@@ -123,93 +117,6 @@
      <!-- Debug args (OVERRIDE IN BUILD.PROPERTIES) -->
      <property name="debug.jvm.args" value=""/>
  
@@ -60,28 +59,37 @@ index 8c18887..199e5d3 100644
 -
 -    <artifact:localRepository id="local.repository" path="${maven.repo.local}"/>
 -    
--    <artifact:remoteRepository id="jboss.repo" url="https://repository.jboss.org/nexus/"/>
--    <artifact:remoteRepository id="j.n.repo" url="http://download.java.net/maven/2/"/>
--    <artifact:remoteRepository id="gf.repo" url="http://download.java.net/maven/glassfish/"/>
--    <artifact:remoteRepository id="gf.nexus.repo" url="http://maven.glassfish.org/content/groups/glassfish/"/>
--    <artifact:remoteRepository id="codehaus.repo" url="http://repository.codehaus.org/"/>
+-    <artifact:remoteRepository id="j.n.repo" url="https://maven.java.net/content/repositories/releases/"/>
+-    <artifact:remoteRepository id="j.n.repo.snapshot" url="https://maven.java.net/content/repositories/snapshots/"/>
 -    <artifact:remoteRepository id="ibiblio.repo" url="http://mirrors.ibiblio.org/pub/mirrors/maven2/"/>
 -
 -    <artifact:dependencies filesetId="compile.filepath" pathId="compile.path">
--        <dependency groupId="javax.el" artifactId="el-api" version="1.0" scope="provided"/>
--        <dependency groupId="org.glassfish" artifactId="javax.servlet" version="3.0-SNAPSHOT" scope="provided"/>
--        <dependency groupId="javax.servlet.jsp" artifactId="jsp-api" version="2.1" scope="provided"/>
+-        <dependency groupId="javax.el" artifactId="javax.el-api" version="2.2.1" scope="provided"/>
+-        <dependency groupId="javax.servlet" artifactId="javax.servlet-api" version="3.0.1" scope="provided"/>
+-        <dependency groupId="javax.servlet.jsp" artifactId="javax.servlet.jsp-api" version="2.2.1" scope="provided"/>
 -        <dependency groupId="javax.annotation" artifactId="jsr250-api" version="1.0" scope="provided"/>
 -        <dependency groupId="org.codehaus.groovy" artifactId="groovy-all" version="1.6.9" scope="provided"/>
 -        <dependency groupId="javax.validation" artifactId="validation-api" version="1.0.0.GA" scope="provided"/>
--        <dependency groupId="javax.inject" artifactId="javax.inject" version="1.0-PFD-1" scope="provided"/>
--        <dependency groupId="jstl" artifactId="jstl" version="1.2" scope="provided" />
+-        <dependency groupId="javax.inject" artifactId="javax.inject" version="1" scope="provided"/>
+-        <dependency groupId="javax.servlet.jsp.jstl" artifactId="jstl-api" version="1.2" scope="provided" />
+-        <dependency groupId="javax" artifactId="javaee-web-api" version="6.0" scope="provided"/>
 -        <dependency groupId="com.sun.el" artifactId="el-ri" version="1.0" scope="provided"/>
 -        <localRepository refid="local.repository"/>
 -        <remoteRepository refid="j.n.repo"/>
--        <remoteRepository refid="gf.repo"/>
--        <remoteRepository refid="gf.nexus.repo"/>
--        <remoteRepository refid="jboss.repo"/>  <!-- needed for validation-api -->
+-        <remoteRepository refid="j.n.repo.snapshot"/>
+-    </artifact:dependencies>
+-
+-    <artifact:dependencies filesetId="cdi.filepath" pathId="cdi.path">
+-        <dependency groupId="javax.enterprise" artifactId="cdi-api" version="1.1" scope="provided"/>
+-        <localRepository refid="local.repository"/>
+-        <remoteRepository refid="ibiblio.repo"/>
+-    </artifact:dependencies>
+-    
+-    <artifact:dependencies filesetId="jsf-spi.filepath" pathId="jsf-spi.path">
+-        <dependency groupId="com.sun.faces" artifactId="jsf-spi" version="1.0" scope="provided"/>
+-        <localRepository refid="local.repository"/>
+-        <remoteRepository refid="j.n.repo"/>
+-        <remoteRepository refid="j.n.repo.snapshot"/>
 -    </artifact:dependencies>
 -    
 -    <artifact:dependencies filesetId="commons.filepath" pathId="commons.path">
@@ -90,7 +98,8 @@ index 8c18887..199e5d3 100644
 -        <dependency groupId="commons-beanutils" artifactId="commons-beanutils" version="1.6.1"/>
 -        <dependency groupId="commons-logging" artifactId="commons-logging" version="1.0.4"/>
 -        <localRepository refid="local.repository"/>
--        <remoteRepository refid="gf.nexus.repo"/>
+-        <remoteRepository refid="j.n.repo"/>
+-        <remoteRepository refid="j.n.repo.snapshot"/>
 -    </artifact:dependencies>
 -
 -    <artifact:dependencies filesetId="servlet25test.filepath" pathId="servlet25test.path">
@@ -100,10 +109,11 @@ index 8c18887..199e5d3 100644
 -        <dependency groupId="javax.servlet.jsp.jstl" artifactId="jstl-api" version="1.2" scope="provided"/>
 -        <dependency groupId="javax.annotation" artifactId="jsr250-api" version="1.0" scope="provided"/>
 -        <localRepository refid="local.repository"/>
--        <remoteRepository refid="gf.nexus.repo"/>
+-        <remoteRepository refid="j.n.repo"/>
+-        <remoteRepository refid="j.n.repo.snapshot"/>
 -    </artifact:dependencies>
 -
 -
      <!-- Intra-project dependency property names -->
  
-     <property name="jsf-tools.jar" 
+     <!-- this is hard coded to match the values in ${basedir}/jsf-tools/pom.xml -->
